@@ -17,4 +17,14 @@ $(document).ready(function () {
       }
     });
   }
+  function loadEvents() {
+    $(".time-block").each(function () {
+      var blockHour = $(this).attr("data-hour");
+      var storedEvent = localStorage.getItem(blockHour);
+
+      if (storedEvent !== null) {
+        $(this).find("textarea").val(storedEvent);
+      }
+    });
+  }
 });
