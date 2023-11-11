@@ -1,7 +1,8 @@
 $(document).ready(function () {
   // Display current day using dayjs
   $("#currentDay").text(dayjs().format("dddd, MMMM D"));
-  // Function to color-code time blocks
+
+  // Function to color-code time blocks based on current time
   function updateHourlyBlocks() {
     var currentHour = dayjs().hour();
 
@@ -17,6 +18,8 @@ $(document).ready(function () {
       }
     });
   }
+
+  // Function to load events from local storage
   function loadEvents() {
     $(".time-block").each(function () {
       var blockHour = $(this).attr("data-hour");
@@ -27,10 +30,12 @@ $(document).ready(function () {
       }
     });
   }
+
+  // Function to dynamically generate time blocks
   function generateTimeBlocks() {
     var container = $(".container");
 
-    for (var hour = 9; hour <= 24; hour++) {
+    for (var hour = 9; hour <= 17; hour++) {
       var timeBlock = $('<div class="row time-block">');
       timeBlock.attr("data-hour", hour);
 
@@ -48,6 +53,8 @@ $(document).ready(function () {
       container.append(timeBlock);
     }
   }
+
+  // Event listener for saving events to local storage
   $(".container").on("click", ".saveBtn", function () {
     var hour = $(this).parent().attr("data-hour");
     var eventText = $(this).siblings("textarea").val();
@@ -55,9 +62,11 @@ $(document).ready(function () {
     localStorage.setItem(hour, eventText);
   });
 
+  // Initial generation of time blocks and updating their colors
   generateTimeBlocks();
   updateHourlyBlocks();
   loadEvents();
 
+  // Update colors every minute
   setInterval(updateHourlyBlocks, 60000);
 });
