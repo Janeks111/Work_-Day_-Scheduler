@@ -27,4 +27,25 @@ $(document).ready(function () {
       }
     });
   }
+  function generateTimeBlocks() {
+    var container = $(".container");
+
+    for (var hour = 9; hour <= 24; hour++) {
+      var timeBlock = $('<div class="row time-block">');
+      timeBlock.attr("data-hour", hour);
+
+      // Convert 24-hour format to 12-hour format with AM/PM
+      var formattedHour = hour % 12 === 0 ? 12 : hour % 12;
+      var amPm = hour < 12 ? "AM" : "PM";
+
+      var hourDiv = $('<div class="hour col-md-1">').text(
+        formattedHour + " " + amPm
+      );
+      var textarea = $("<textarea class='col-md-10'>");
+      var saveBtn = $('<button class="saveBtn col-md-1">Save</button>');
+
+      timeBlock.append(hourDiv, textarea, saveBtn);
+      container.append(timeBlock);
+    }
+  }
 });
