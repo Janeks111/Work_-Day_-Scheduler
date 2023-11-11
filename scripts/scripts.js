@@ -48,4 +48,14 @@ $(document).ready(function () {
       container.append(timeBlock);
     }
   }
+  $(".container").on("click", ".saveBtn", function () {
+    var hour = $(this).parent().attr("data-hour");
+    var eventText = $(this).siblings("textarea").val();
+
+    localStorage.setItem(hour, eventText);
+  });
+
+  generateTimeBlocks();
+  updateHourlyBlocks();
+  loadEvents();
 });
