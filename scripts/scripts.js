@@ -58,4 +58,6 @@ $(document).ready(function () {
   generateTimeBlocks();
   updateHourlyBlocks();
   loadEvents();
+
+  setInterval(updateHourlyBlocks, 60000);
 });
